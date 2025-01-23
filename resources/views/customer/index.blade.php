@@ -51,7 +51,7 @@
                 </div>
 
                 <div class = "ht-right">
-                    <a href = "login.html" class = "login-panel"><i class = "fa fa-user"></i>Login</a>
+                    <a href = "{{route('login') }}" class = "login-panel"><i class = "fa fa-user"></i>Login</a>
                     <div class = "lan-selector">
                         <select class= "language_drop" name = "contries" id = "contries" style = "width:300px;">
                             <option value = "yt" data-image="customer/img/flag-1.jpg" data-imagecss = "flag yt"
@@ -197,8 +197,8 @@
                 </div>
                 <nav class ="nav-menu mobile-menu">
                     <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Shop</a></li>
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('shop') }}">Shop</a></li>
                         <li><a href="">Collection</a>
                             <ul class="dropdown">
                                 <li><a href = "">Men's</a></li>
@@ -206,13 +206,13 @@
                                 <li><a href = "">Kid's</a></li>
                             </ul>
                         </li>
-                        <li><a href="">Blog</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="{{ route('blog') }}">Blog</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
                                 <li><a href = "">Blog Details</a></li>
                                 <li><a href = "">Shopping Cart</a></li>
-                                <li><a href = "">Checkout</a></li>
+                                <li><a href = "{{ route('check-out') }}">Checkout</a></li>
                                 <li><a href = "">Faq</a></li>
                                 <li><a href = "">Register</a></li>
                                 <li><a href = "">Login</a></li>

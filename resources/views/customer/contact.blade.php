@@ -198,7 +198,7 @@
                 <nav class ="nav-menu mobile-menu">
                     <ul>
                         <li><a href="">Home</a></li>
-                        <li class = "active"><a href="">Shop</a></li>
+                        <li><a href="">Shop</a></li>
                         <li><a href="">Collection</a>
                             <ul class="dropdown">
                                 <li><a href = "">Men's</a></li>
@@ -207,7 +207,7 @@
                             </ul>
                         </li>
                         <li><a href="">Blog</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li class = "active"><a href="">Contact</a></li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
                                 <li><a href = "">Blog Details</a></li>
@@ -236,7 +236,7 @@
                     <div class="col-lg-12">
                         <div class = "breadcrumb-text">
                             <a href = "#"><i class = "fa fa-home"></i>Home</a>
-                            <span>Shop</span>
+                            <span>Contact</span>
                         </div>
                     </div>
             </div>
@@ -244,265 +244,89 @@
     </div>
 
 
-    <!-- Product Shop section Begin  -->
-    <section class = "product-shop spad">
-       <div class = "container">
-        <div class="row">
-            <div class = "col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-                <div class = "filter-widget">
-                    <h4 class = "fw-title">Categories</h4>
-                    <ul class = "filter-catagories">
-                        <li><a href = "#">Men</a></li>
-                        <li><a href = "#">Women</a></li>
-                        <li><a href = "#">Kids</a></li>
-                    </ul>
+    <!-- Map section -->
+    <div class= "map-spad">
+        <div class= "container">
+            <div class ="map-inner">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29793.98845886396!2d105.81636411800973!3d21.02273835998302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab9bd9861ca1%3A0xe7887f7b72ca17a9!2zSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1737602655357!5m2!1svi!2s" 
+                width="600" height="610" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+                <div class ="icon">
+                    <i class ="fa fa-map-marker"></i>
                 </div>
-                <div class = "filter-widget">
-                    <h4 class = "fw-title">Brand</h4>
-                    <div class = "fw-brand-check">
-                        <div class = "bc-item">
-                            <label for = "bc-calvin">
-                                Calvin Klein
-                                <input type = "checkbox" id="bc-calvin">
-                                <span class = "checkmark">
+            </div>
+        </div>
+    </div>
 
-                                </span>
-                            </label>
-                        </div>
-                        <div class = "bc-item">
-                            <label for = "bc-calvin">
-                                Calvin Klein
-                                <input type = "checkbox" id="bc-calvin">
-                                <span class = "checkmark">
 
-                                </span>
-                            </label>
-                        </div>
-                        <div class = "bc-item">
-                            <label for = "bc-calvin">
-                                Calvin Klein
-                                <input type = "checkbox" id="bc-calvin">
-                                <span class = "checkmark">
-
-                                </span>
-                            </label>
-                        </div>
-                        <div class = "bc-item">
-                            <label for = "bc-calvin">
-                                Calvin Klein
-                                <input type = "checkbox" id="bc-calvin">
-                                <span class = "checkmark">
-
-                                </span>
-                            </label>
-                        </div>
+    <!-- Contact section -->
+    <section class= "contact-section spad">
+        <section class ="container">
+            <div class= "row">
+                <div class= "col-lg-5">
+                    <div class= "contact-title">
+                        <h4>Contacts Us</h4>
+                        <p>ewrwerwefsfadfwefwfwefwfwyretgrgr</p>
                     </div>
-                </div>
-                <div class = "filter-widget">
-                    <h4 class = "fw-title">Price</h4>
-                    <div class = "filter-range-wrap">
-                        <div class = "range-slider">
-                            <div class = "price-input">
-                                <input type=  "text" id = "minamount">
-                                <input type=  "text" id = "maxamount">
+                    <div class="contact-widget">
+                        <div class ="cw-item">
+                            <div class ="ci-icon">
+                                <i class ="ti-location-pin"></i>
+                            </div>
+                            <div class ="ci-text">
+                                <span>Address:</span>
+                                <p>Ha Noi</p>
                             </div>
                         </div>
 
-                        <div class = "price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                        data-min = "33" data-max = "98">
-                            <div class = "ui-slider-range ui-corner-all ui-widget-header"></div>
-                            <span tableindex = "0" class  ="ui-slider-handle ui-corner-all ui-state-default"></span>
-                            <span tableindex = "0" class  ="ui-slider-handle ui-corner-all ui-state-default"></span>
-                        </div>
-                    </div>
-                    <a href = "#" class = "filter-btn">Filter</a>
-                </div>
-                <div class = "filter-widget">
-                    <h4 class = "fw-title">Color</h4>
-                    <div class = "fw-color-choose">
-                        <div class = "cs-item">
-                            <input type = "radio" id="cs-black">
-                            <label class = "cs-black" for = "cs-black">Black</label>
+                        <div class ="cw-item">
+                            <div class ="ci-icon">
+                                <i class ="ti-mobile"></i>
+                            </div>
+                            <div class ="ci-text">
+                                <span>Phone:</span>
+                                <p>0123456789</p>
+                            </div>
                         </div>
 
-                        <div class = "cs-item">
-                            <input type = "radio" id="cs-violet">
-                            <label class = "cs-violet" for = "cs-violet">Violet</label>
-                        </div>
-
-                        <div class = "cs-item">
-                            <input type = "radio" id="cs-blue">
-                            <label class = "cs-blue" for = "cs-blue">Blue</label>
-                        </div>
-
-                        <div class = "cs-item">
-                            <input type = "radio" id="cs-yellow">
-                            <label class = "cs-yellow" for = "cs-yellow">Yellow</label>
-                        </div>
-
-                        <div class = "cs-item">
-                            <input type = "radio" id="cs-red">
-                            <label class = "cs-red" for = "cs-red">Red</label>
-                        </div>
-
-                        <div class = "cs-item">
-                            <input type = "radio" id="cs-green">
-                            <label class = "cs-green" for = "cs-green">Green</label>
+                        <div class ="cw-item">
+                            <div class ="ci-icon">
+                                <i class ="ti-email"></i>
+                            </div>
+                            <div class ="ci-text">
+                                <span>Email:</span>
+                                <p>dfas@gmail.com</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class = "filter-widget">
-                    <h4 class = "fw-title">Size</h4>
-                    <div class = "fw-size-choose">
-                        <div class = "sc-item">
-                            <input type = "radio" id = "s-size">
-                            <label for= "s-size" >S</label>
+                <div class= "col-lg-6 offset-lg-1">
+                    <div class="contact-form">
+                        <div class ="leave-comment">
+                            <h4>Leave A Comment</h4>
+                            <p>Our Staff will call back later and answer your questions</p>
+                            <form action = "#" class="comment-form">
+                                <div class= "row">
+                                    <div class= "col-lg-6">
+                                        <input type ="text" placeholder="Your name">
+                                    </div>
+                                    <div class= "col-lg-6">
+                                        <input type ="text" placeholder="Your email">
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <textarea placeholder="Your message"></textarea>
+                                        <button type= "submit" class="site-btn">Send message</button>
+                                    </div>
+                                </div>
+                            </form>                            
                         </div>
-                        <div class = "sc-item">
-                            <input type = "radio" id = "m-size">
-                            <label for= "m-size" >M</label>
-                        </div>
-                        <div class = "sc-item">
-                            <input type = "radio" id = "l-size">
-                            <label for= "l-size" >L</label>
-                        </div>
-                        <div class = "sc-item">
-                            <input type = "radio" id = "xs-size">
-                            <label for= "xs-size" >XS</label>
-                        </div>
-                    </div>
-                </div>
-                <div class = "filter-widget">
-                    <h4 class = "fw-title">Tags</h4>
-                    <div class  = "fw-tags">    
-                        <a href = "#">Towel</a>
-                        <a href = "#">Shoes</a>
-                        <a href = "#">Coat</a>
-                        <a href = "#">Dresses</a>
-                        <a href = "#">Trousers</a>
-                        <a href = "#">Men's hats</a>
-                        <a href = "#">Backpack</a>
                     </div>
                 </div>
             </div>
-
-            <div class = "col-lg-9 order-1 order-lg-2"> 
-                <div class = "product-show-option">
-                    <div class= "row" >
-                        <div class = "col-lg-7 col-md-7">
-                            <div class = "select-option">
-                                <select class= "sorting">
-                                    <option value=  ""> 
-                                        Default Sorting
-                                    </option>
-                                </select>
-
-                                <select class= "p-show">
-                                    <option value=  ""> 
-                                        Show:
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class = "col-lg-5 col-md-5 text-right">
-                            <p>Show 01-09 Of 36 Product</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "product-list ">
-                    <div class = "row">
-                        <div class = "col-lg-4 col-sm-6">
-                            <div class = "product-item">
-                                <div class= "pi-pic">
-                                    <img src = "customer/img/products/product-1.jpg" alt = "">
-                                    <div class = "sale pp-sale">Sale</div>
-                                    <div class="icon">
-                                        <i class = "icon_heart_alt"></i>
-                                    </div>
-                                    <ul>
-                                        <li class=  "w-icon active"><a href = "#"><i class=  "icon_bag_alt"></i></a></li>
-                                        <li class = "quick-view"><a href = "product.html">+ Quick view</a></li>
-                                        <li class = "w-icon"><a href = ""><i class = "fa fa-random"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class=  "pi-text">
-                                    <div class = "catagory-name">Towel</div>
-                                    <a href=  "#">
-                                        <h5>Pure Pineapple</h5>
-                                    </a>
-                                    <div class=  "product-price">
-                                        $14.00
-                                        <span>$35.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "col-lg-4 col-sm-6">
-                            <div class = "product-item">
-                                <div class= "pi-pic">
-                                    <img src = "customer/img/products/product-1.jpg" alt = "">
-                                    <div class = "sale pp-sale">Sale</div>
-                                    <div class="icon">
-                                        <i class = "icon_heart_alt"></i>
-                                    </div>
-                                    <ul>
-                                        <li class=  "w-icon active"><a href = "#"><i class=  "icon_bag_alt"></i></a></li>
-                                        <li class = "quick-view"><a href = "{{ route('product') }}">+ Quick view</a></li>
-                                        <li class = "w-icon"><a href = ""><i class = "fa fa-random"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class=  "pi-text">
-                                    <div class = "catagory-name">Towel</div>
-                                    <a href=  "#">
-                                        <h5>Pure Pineapple</h5>
-                                    </a>
-                                    <div class=  "product-price">
-                                        $14.00
-                                        <span>$35.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "col-lg-4 col-sm-6">
-                            <div class = "product-item">
-                                <div class= "pi-pic">
-                                    <img src = "customer/img/products/product-1.jpg" alt = "">
-                                    <div class = "sale pp-sale">Sale</div>
-                                    <div class="icon">
-                                        <i class = "icon_heart_alt"></i>
-                                    </div>
-                                    <ul>
-                                        <li class=  "w-icon active"><a href = "#"><i class=  "icon_bag_alt"></i></a></li>
-                                        <li class = "quick-view"><a href = "product.html">+ Quick view</a></li>
-                                        <li class = "w-icon"><a href = ""><i class = "fa fa-random"></i></a></li>
-                                    </ul>
-                                </div>
-                                <div class=  "pi-text">
-                                    <div class = "catagory-name">Towel</div>
-                                    <a href=  "#">
-                                        <h5>Pure Pineapple</h5>
-                                    </a>
-                                    <div class=  "product-price">
-                                        $14.00
-                                        <span>$35.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class = "loading-more">
-                    <i class = "icon_loading"></i>
-                    <a href = "#">Loading More</a>
-                </div>
-            </div>
-        </div> 
-
-       </div>
+        </section>
     </section>
+
 
 
     <div class = "partner-logo"> 
