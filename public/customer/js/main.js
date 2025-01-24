@@ -56,7 +56,7 @@
         Product Slider
     --------------------*/
    $(".product-slider").owlCarousel({
-        loop: true,
+        loop: false,
         margin: 25,
         nav: true,
         items: 4,
@@ -246,5 +246,30 @@
 		}
 		$button.parent().find('input').val(newVal);
 	});
+    !function(o,e){"object"==typeof exports?module.exports=e(o.jQuery):o.owlcarousel2_filter=e(o.jQuery)}(window,function(o,e){"use strict";o.fn.owlcarousel2_filter=function(o,e){var t=this.data("owl.carousel").options;this.trigger("destroy.owl.carousel"),this.oc2_filter_clone||(this.oc2_filter_clone=this.clone());var l=this.oc2_filter_clone.children(o).clone();this.empty().append(l).owlCarousel(t)}});
+    const product_men = $(".product-slider.men");
+    const product_women = $(".product-slider.women");   
+
+
+    $('.filter-control').on('click','.item',function(){
+        const $item = $(this);
+
+        const filter = $item.data('tag');
+        const category = $item.data('category');
+
+        $item.siblings().removeClass('active');
+        $item.addClass('active')
+
+        if(category === 'men'){
+            product_men.owlcarousel2_filter(filter);
+        }
+
+        if(category === 'women'){
+            product_women.owlcarousel2_filter(filter);
+        }
+    })
+
+
+
 
 })(jQuery);

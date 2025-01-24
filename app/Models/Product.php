@@ -20,4 +20,15 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
+    public function productComments(){
+        return $this->hasMany(ProductComment::class);
+    }
+    public function productDetails(){
+        return $this->hasMany(ProductDetail::class);
+    }
+
+    public function productImages(){
+        return $this->hasMany(ProductImage::class);
+    }
+    
 }

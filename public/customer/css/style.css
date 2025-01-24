@@ -1896,6 +1896,13 @@ ol {
 	background: #81D742;
 }
 
+.filter-widget .fw-color-choose .cs-item label.cs-white:before {
+	background: #FFFFFF;
+	border: 1px solid #000000;
+}
+
+
+
 .filter-widget .fw-color-choose .cs-item label:before {
 	position: absolute;
 	left: 0;
@@ -2237,6 +2244,46 @@ ol {
 .product-details .pd-color .pd-color-choose .cc-item label.cc-violet {
 	background: #8230E3;
 }
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-yellow {
+    background: #EEEE21; /* Màu vàng */
+}
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-violet {
+    background: #8230E3; /* Màu tím */
+}
+
+/* Thêm màu đỏ */
+.product-details .pd-color .pd-color-choose .cc-item label.cc-red {
+    background: #DC3232; /* Màu đỏ */
+}
+
+/* Thêm màu xanh dương */
+.product-details .pd-color .pd-color-choose .cc-item label.cc-blue {
+    background: #2773BE; /* Màu xanh dương */
+}
+
+/* Thêm màu xanh lá cây */
+.product-details .pd-color .pd-color-choose .cc-item label.cc-green {
+    background: #81D742; /* Màu xanh lá cây */
+}
+
+/* Thêm màu cam */
+.product-details .pd-color .pd-color-choose .cc-item label.cc-orange {
+    background: #FFA500; /* Màu cam */
+}
+
+/* Thêm màu đen */
+.product-details .pd-color .pd-color-choose .cc-item label.cc-black {
+    background: #252525; /* Màu đen */
+}
+
+
+.product-details .pd-color .pd-color-choose .cc-item label.cc-white {
+    background: #FFFFFF; /* Màu trắng */
+    border: 1px solid #000000; /* Viền đen, có độ dày 2px */
+}
+
 
 .product-details .pd-size-choose {
 	margin-bottom: 30px;
@@ -4309,4 +4356,43 @@ ol {
 		padding-left: 15px;
 		padding-right: 15px;
 	}
+}
+
+
+
+/* Rating */
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    display: none;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
 }
