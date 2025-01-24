@@ -12,6 +12,9 @@
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+   
+
+
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="customer/css/bootstrap.min.css" type="text/css">
@@ -27,7 +30,6 @@
 
 <body>
     <!-- Start coding here -->
-
 
     <div id = "preloder">
         <div class = "loader">
@@ -109,67 +111,58 @@
                                 <li class= "cart-icon">
                                     <a href = "#"> 
                                         <i class = "icon_bag_alt"></i>
-                                        <span>3</span>
+                                        <span>{{ $productInCarts->count('id') }}</span>
                                     </a>
                                     <div class=  "cart-hover">
                                         <div class = "select-items">
                                             <table>
                                                 <tbody>
+                                                    @php
+                                                    $totalPrice = 0
+                                                    @endphp
+                                            
+                                                    @foreach($productInCarts as $productInCart)
                                                     <tr>
+                                                        @php
+                                                        $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
+                                                        @endphp
                                                         <td class = "si-pic"><img src= "customer/img/select-product-1.jpg"></td>
                                                         <td class=  "si-text">
                                                             <div class= "product-selected">
-                                                                <p>&60.00 x 1</p>
-                                                                <h6>Kabino Bedside Table</h6>
+                                                                <p>${{ $productInCart->price }} x {{ $productInCart->pivot->quantity }}</p>
+                                                                <h6>{{ $productInCart->name }}</h6>
                                                             </div>
                                                         </td>
-                                                        <td class="si-close"> 
-                                                            <i class= "ti-close"></i>
-                                                        </td>
+                                                      
+                                                            <form action = {{ Route('cart.destroy',$productInCart->id) }} method = "POST">
+                                                                @method('DELETE')
+                                                                @csrf
+                                                                <td class="si-close"><button style = "border:none;background:white;" type = "submit"><i class= "ti-close"></i></button></td>
+                                                            </form>
+    
                                                     </tr>
-
-                                                    <tr>
-                                                        <td class = "si-pic"><img src= "customer/img/select-product-1.jpg"></td>
-                                                        <td class=  "si-text">
-                                                            <div class= "product-selected">
-                                                                <p>&60.00 x 1</p>
-                                                                <h6>Kabino Bedside Table</h6>
-                                                            </div>
-                                                        </td>
-                                                        <td class="si-close"> 
-                                                            <i class= "ti-close"></i>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td class = "si-pic"><img src= "customer/img/select-product-2.jpg"></td>
-                                                        <td class=  "si-text">
-                                                            <div class= "product-selected">
-                                                                <p>&60.00 x 1</p>
-                                                                <h6>Kabino Bedside Table</h6>
-                                                            </div>
-                                                        </td>
-                                                        <td class="si-close"> 
-                                                            <i class= "ti-close"></i>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class= "select-total">
                                             <span>total</span>
-                                            <h5>$120.00</h5>
+                                            <h5>
+                                                 {{ $totalPrice }} 
+                                            </h5>
+                                            
                                         </div>
+
                                         <div class= "select-button">
-                                            <a href = "shopping-cart.html" class ="primary-btn view-card">VIEW CARD</a>
-                                            <a href = "check-out.html" class ="primary-btn check-btn">CHECK OUT</a>
+                                            <a href = "{{ Route('cart.index') }}" class ="primary-btn view-card">VIEW CARD</a>
+                                            <a href = "" class ="primary-btn check-btn">CHECK OUT</a>
                                         </div>
 
                                     </div>
                                 </li>
 
                                 <li class= "cart-price">
-                                    $150.00
+                                    ${{ $totalPrice }}
                                 </li>
                             </ul>
                         </div>
@@ -228,12 +221,23 @@
             </div>
         </div>  
     </header>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
 
     {{-- content --}}
     @yield('content')
 
-
+    
 
  {{-- Partner Logo Section Begin --}}
 
@@ -365,6 +369,7 @@
 <script src="customer/js/owl.carousel.min.js"></script>
 <script src="customer/js/main.js"></script>
 <script src = "owlcarousel2-filter.min.js"></script>
+
 </body>
 
 </html>

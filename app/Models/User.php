@@ -48,4 +48,17 @@ class User extends Authenticatable
     public function productComments(){
         return $this->hasMany(ProductComment::class);
     }
+
+    public function carts()
+{
+    return $this->hasMany(Cart::class);
+}
+
+public function cartProducts()
+{
+    return $this->belongsToMany(Product::class, 'carts')
+                ->withPivot('quantity')
+                ->withTimestamps();
+}
+
 }
