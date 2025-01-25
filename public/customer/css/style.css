@@ -4397,3 +4397,18 @@ ol {
 .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
+
+
+
+.styled-input {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    color: #555;
+    border-radius: 4px;
+    width: 50%;
+    box-sizing: border-box;
+    cursor: not-allowed;
+	text-align: center;
+}

@@ -50,15 +50,16 @@
                                         <td class= "cart-title first-row">
                                             <h5>{{ $productInCart->name }}</h5>
                                         </td>
-                                        <td class=  "p-price first-row">${{ $productInCart->price }}</td>
-                                        <td class ="qua-col first-row"> 
-                                            <div class = "quantity">
-                                                <div class = "pro-qty">
-                                                    <input type= "text" value="{{ $productInCart->pivot->quantity }}">
+                                        <td class="p-price first-row" data-price="{{ $productInCart->price }}">${{ $productInCart->price }}</td>
+                                        <td class="qua-col first-row">
+                                            <div class="quantity">
+                                                <div >
+                                                    <input type="text" class="styled-input"  value="{{ $productInCart->pivot->quantity }}" readonly>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class=  "total-price first-row">${{ ($productInCart->pivot->quantity * $productInCart->price) }}</td>
+                                        <td class="total-price first-row">${{ ($productInCart->pivot->quantity * $productInCart->price) }}</td>
+
                                         <form action = {{ Route('cart.destroy',$productInCart->id) }} method = "POST">
                                             @method('DELETE')
                                             @csrf
@@ -75,7 +76,7 @@
                         <div class = "col-lg-4">
                             <div class= "cart-buttons">
                                 <a href = "{{ Route('products.index') }}" class= "primary-btn continue-shop">Continue shopping</a>
-                                <a href = "#" class= "primary-btn up-cart">Update cart</a>
+                            
                             </div>
                             <div class = "discount-coupon">
                                 <h6>Discount Codes</h6>
@@ -100,4 +101,6 @@
             </div>
         </div>
     </div>
+
+   
 @endsection

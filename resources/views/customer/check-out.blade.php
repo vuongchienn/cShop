@@ -25,7 +25,8 @@
     <!-- Checkout section -->
     <div class = "checkout-section spad">
         <div class= "container">
-            <form action = "#" class="checkout-form">
+            <form action = "{{ Route('order.store') }}" method ="POST" class="checkout-form" >
+                @csrf
                 <div class="row">
                     <div class ="col-lg-6">
                         <div class= "checkout-content">
@@ -35,40 +36,47 @@
                         <div class= "row">
                             <div class= "col-lg-6">
                                 <label for = "fir">First Name<span>*</span></label>
-                                <input type= "text" id ="fir"> 
+                                <input type= "text" id ="fir" name='first_name'> 
+                                @error('first_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class= "col-lg-6">
                                 <label for = "last">Last Name<span>*</span></label>
-                                <input type= "text" id ="lastlast"> 
+                                <input type= "text" id ="lastlast" name= "last_name"> 
+                                @error('last_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
-                            <div class= "col-lg-12">
-                                <label for = "cun-name">Company Name</label>
-                                <input type= "text" id ="cun-name"> 
-                            </div>
-                            <div class= "col-lg-12">
-                                <label for = "cun">Country<span>*</span></label>
-                                <input type= "text" id ="cun"> 
-                            </div>
+                
                             <div class= "col-lg-12">
                                 <label for = "street">Street Address<span>*</span></label>
-                                <input type= "text" id ="street" class="street-first">
-                                <input type= "text"> 
+                                <input type= "text" id ="street" class="street-first" name = "street_address">
+                                @error('street_address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
+            
                             <div class= "col-lg-12">
-                                <label for = "zip">Postcode / ZIP (optional)</label>
-                                <input type= "text" id ="zip"> 
-                            </div>
-                            <div class= "col-lg-12">
-                                <label for = "town">Town / City<span>*</span></label>
-                                <input type= "text" id ="town"> 
+                                <label for = "town">City<span>*</span></label>
+                                <input type= "text" id ="town" name = "city"> 
+                                @error('city')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class= "col-lg-6">
                                 <label for = "email">Email Address<span>*</span></label>
-                                <input type= "text" id ="email"> 
+                                <input type= "text" id ="email" name = "email"> 
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class= "col-lg-6">
                                 <label for = "phone">Phone<span>*</span></label>
-                                <input type= "text" id ="phone"> 
+                                <input type= "text" id ="phone" name = "phone"> 
+                                @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class= 'col-lg-12'>
                                 <div class= "create-item">
@@ -92,28 +100,37 @@
                             <div class = "order-total">
                                 <ul class = "order-table">
                                     <li>Product<span>Total</span></li>   
-                                    <li class = "fw-normal">Combination x 1 <span>$60.00</span></li>
-                                    <li class = "fw-normal">Combination x 1 <span>$60.00</span></li>
-                                    <li class = "fw-normal">Combination x 1 <span>$120.00</span></li>
-                                    <li class = "fw-normal">Subtotal<span>$240.00</span></li>
-                                    <li class = "total-price">Total<span>$240.00</span></li>
+                                    @php
+                                        $totalPrice = 0;
+                                    @endphp
+                                  
+                                    @foreach($productInCarts as $productInCart)
+                                        @php
+                                            $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
+                                        @endphp
+                                        <li class = "fw-normal">{{ $productInCart->name }} x {{ $productInCart->pivot->quantity }} <span>${{ $productInCart->price*$productInCart->pivot->quantity }}</span></li>
+                                    @endforeach
+
+                                    <li class = "fw-normal">Subtotal<span>${{ $totalPrice }}</span></li>
+                                    <li class = "total-price">Total<span>${{ $totalPrice }}</span></li>
                                 </ul>
-                                <div class ="payment-check">
-                                    <div class ="pc-item">
+                                <div class="payment-check">
+                                    <div class="pc-item">
                                         <label for="pc-check">
-                                            Cheque Payment
-                                            <input type= "checkbox" id = "pc-check">
-                                            <span class= "checkmark"></span>
+                                            Pay later
+                                            <input type="radio" id="pc-check" name="payment_method" value="pay_later">
+                                            <span class="checkmark"></span>
                                         </label>
                                     </div>
-                                    <div class ="pc-item">
+                                    <div class="pc-item">
                                         <label for="pc-paypal">
-                                            Paypal
-                                            <input type= "checkbox" id = "pc-paypal">
-                                            <span class= "checkmark"></span>
+                                            Pay online
+                                            <input type="radio" id="pc-paypal" name="payment_method" value="pay_online">
+                                            <span class="checkmark"></span>
                                         </label>
                                     </div>
                                 </div>
+                                
                                 <div class ="order-btn">
                                     <button type="submit" class ="site-btn place-btn">Place Order</button>
                                 </div>

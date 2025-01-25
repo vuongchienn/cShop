@@ -155,7 +155,7 @@
 
                                         <div class= "select-button">
                                             <a href = "{{ Route('cart.index') }}" class ="primary-btn view-card">VIEW CARD</a>
-                                            <a href = "" class ="primary-btn check-btn">CHECK OUT</a>
+                                            <a href = "{{ Route('check-out.index') }}" class ="primary-btn check-btn">CHECK OUT</a>
                                         </div>
 
                                     </div>

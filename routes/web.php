@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\customer\ProductController as CustomerProductController;
 use App\Http\Controllers\customer\HomeController as HomeController;
 use App\Http\Controllers\customer\CartController as CartController;
-
+use App\Http\Controllers\customer\CheckoutController as CheckoutController;
+use App\Http\Controllers\customer\OrderController as OrderController;
 
 Route::get('/', [CustomerProductController::class,'index'])->name('home');
 
@@ -53,6 +54,8 @@ Route::prefix('customer')->group(function () {
     Route::resource('products',CustomerProductController::class);
     Route::resource('cart',CartController::class);
     Route::resource('home', HomeController::class);
+    Route::resource('check-out', CheckoutController::class);
+    Route::resource('order',OrderController::class);
     Route::get('category/{categoryName}',[CustomerProductController::class,'category']);
     Route::get('tag/{tagName}',[CustomerProductController::class,'tag']);
 });
