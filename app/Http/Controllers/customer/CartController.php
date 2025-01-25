@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\customer;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $productInCarts= User::find(1)->cartProducts;
+        $productInCarts= User::find(Auth::user()->id)->cartProducts;
         View::share('productInCarts', $productInCarts);
         return view("customer.shopping-cart",["productInCarts"=>$productInCarts]);
     }
@@ -34,7 +34,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $user_id = 1;
+        $user_id = Auth::user()->id;
         $product_id = $request->product_id;
         $quantity = $request->quantity;
         Cart::create([
@@ -74,8 +74,8 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        $user_id = 1;
-        $cart = Cart::where('user_id',1)->where('product_id', $id)->first();
+        $user_id = Auth::user()->id;
+        $cart = Cart::where('user_id',$user_id)->where('product_id', $id)->first();
         $cart->delete();
         return back()->with('success','Product removed from the cart succcessfully !');
     }

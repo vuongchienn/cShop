@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\customer;
-use Illuminate\Support\Facades\Auth;
+namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Cart;
-use App\Models\User;
 
-class CheckoutController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $productInCarts= User::find(Auth::user()->id)->cartProducts;
-        return view("customer.check-out",["productInCarts"=>$productInCarts]);
+        return view("admin.user.index");
     }
 
     /**
@@ -64,22 +61,5 @@ class CheckoutController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function vnPayCheck(Request $request){
-        $vnp_ResponseCode=$request->get("vnp_ResponseCode");
-        $vnp_TxnRef = $request->get("vnp_TxnRef");
-        $vnp_Amount=  $request->get("vnp_Amount");
-
-
-
-        if($vnp_ResponseCode !=null){
-            if($vnp_ResponseCode ==00){
-                return view('customer.checkout-result')->with("success","okee");
-            }
-            else{
-                return view('customer.checkout-result')->with("success","fail");
-            }
-        }
     }
 }

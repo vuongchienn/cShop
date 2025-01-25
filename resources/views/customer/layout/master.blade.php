@@ -54,7 +54,11 @@
                 </div>
 
                 <div class = "ht-right">
-                    <a href = "{{route('login') }}" class = "login-panel"><i class = "fa fa-user"></i>Login</a>
+                    @if(!Auth::check())
+                        <a href = "{{route('login') }}" class = "login-panel"><i class = "fa fa-user"></i>Login</a>
+                    @else
+                        <a href = "{{route('logout') }}" class = "login-panel"><i class = "fa fa-user"></i>{{ Auth::user()->name }}-Logout</a>
+                    @endif
                     <div class = "lan-selector">
                         <select class= "language_drop" name = "contries" id = "contries" style = "width:300px;">
                             <option value = "yt" data-image="customer/img/flag-1.jpg" data-imagecss = "flag yt"
@@ -107,7 +111,7 @@
                                         <span>1</span>
                                     </a>
                                 </li>
-
+                                @if($productInCarts)
                                 <li class= "cart-icon">
                                     <a href = "#"> 
                                         <i class = "icon_bag_alt"></i>
@@ -121,27 +125,29 @@
                                                     $totalPrice = 0
                                                     @endphp
                                             
-                                                    @foreach($productInCarts as $productInCart)
-                                                    <tr>
-                                                        @php
-                                                        $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
-                                                        @endphp
-                                                        <td class = "si-pic"><img src= "customer/img/select-product-1.jpg"></td>
-                                                        <td class=  "si-text">
-                                                            <div class= "product-selected">
-                                                                <p>${{ $productInCart->price }} x {{ $productInCart->pivot->quantity }}</p>
-                                                                <h6>{{ $productInCart->name }}</h6>
-                                                            </div>
-                                                        </td>
-                                                      
-                                                            <form action = {{ Route('cart.destroy',$productInCart->id) }} method = "POST">
-                                                                @method('DELETE')
-                                                                @csrf
-                                                                <td class="si-close"><button style = "border:none;background:white;" type = "submit"><i class= "ti-close"></i></button></td>
-                                                            </form>
-    
-                                                    </tr>
-                                                    @endforeach
+                                                    
+                                                        @foreach($productInCarts as $productInCart)
+                                                        <tr>
+                                                            @php
+                                                            $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
+                                                            @endphp
+                                                            <td class = "si-pic"><img src= "customer/img/select-product-1.jpg"></td>
+                                                            <td class=  "si-text">
+                                                                <div class= "product-selected">
+                                                                    <p>${{ $productInCart->price }} x {{ $productInCart->pivot->quantity }}</p>
+                                                                    <h6>{{ $productInCart->name }}</h6>
+                                                                </div>
+                                                            </td>
+                                                        
+                                                                <form action = {{ Route('cart.destroy',$productInCart->id) }} method = "POST">
+                                                                    @method('DELETE')
+                                                                    @csrf
+                                                                    <td class="si-close"><button style = "border:none;background:white;" type = "submit"><i class= "ti-close"></i></button></td>
+                                                                </form>
+        
+                                                        </tr>
+                                                        @endforeach
+                                                  
                                                 </tbody>
                                             </table>
                                         </div>
@@ -160,10 +166,39 @@
 
                                     </div>
                                 </li>
-
+                               
                                 <li class= "cart-price">
                                     ${{ $totalPrice }}
                                 </li>
+                                @else
+            
+                                <li class= "cart-icon">
+                                    <a href = "#"> 
+                                        <i class = "icon_bag_alt"></i>
+                                        <span>{{ 0 }}</span>
+                                    </a>
+                                    <div class=  "cart-hover">
+                                        <div class= "select-total">
+                                            <span>total</span>
+                                            <h5>
+                                                 0
+                                            </h5>
+                                            
+                                        </div>
+
+                                        <div class= "select-button">
+                                            <a href = "{{ Route('cart.index') }}" class ="primary-btn view-card">VIEW CARD</a>
+                                            <a href = "{{ Route('check-out.index') }}" class ="primary-btn check-btn">CHECK OUT</a>
+                                        </div>
+
+                                    </div>
+                                </li>
+                               
+                                <li class= "cart-price">
+                                    $0
+                                </li>
+                                @endif
+                                
                             </ul>
                         </div>
                     </div>

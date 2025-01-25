@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
@@ -21,7 +21,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $productInCarts = User::find(1)->cartProducts; // Hoặc thay User::find(1) bằng cách lấy đúng user
-        View::share('productInCarts', $productInCarts);
+        view()->composer('*', function ($view) {
+            if (Auth::check()) {
+                $productInCarts = User::find(Auth::id())->cartProducts;
+            } else {
+                $productInCarts = []; // Guest user data
+            }
+            $view->with('productInCarts', $productInCarts);
+        });
     }
 }

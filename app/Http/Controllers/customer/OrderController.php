@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\customer;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Utilities\VNPay;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -80,24 +81,33 @@ class OrderController extends Controller
         $order->phone = $validated["phone"];
         $order->street_address = $validated["street_address"];
         $order->city = $validated["city"];
-        $order->user_id = 1;
+        $order->user_id = Auth::user()->id;
         $order->payment_method=$validated['payment_method'];
         $order->save();
 
-        $productInCarts= User::find(1)->cartProducts;
+        $productInCarts= User::find(Auth::user()->id)->cartProducts;
         foreach($productInCarts as $productInCart){
             OrderDetail::create([
-                'user_id'=> 1,
+                'user_id'=> Auth::user()->id,
                 "quantity"=>$productInCart->pivot->quantity,
-                "total"=> $productInCart->pivot->price * $productInCart->pivot->quantity,
+                "total"=> $productInCart->price * $productInCart->pivot->quantity,
                 "order_id"=> $order->id,
                 "product_id"=> $productInCart->id,
-                "amount"=> $productInCart->pivot->price * $productInCart->pivot->quantity
+                "amount"=> $productInCart->price * $productInCart->pivot->quantity
             ]);
         }
 
-        Cart::where("user_id",1)->delete();
+        Cart::where("user_id",Auth::user()->id)->delete();
 
+        if($request->payment_method =="pay_online"){
+            $data_url = VNPAY::vnpay_create_payment([
+                'vnp_TxnRef'=> $order->id,
+                'vnp_OrderInfo'=>'Mô tả đơn hàng',  
+                'vnp_Amount'=> $order->orderDetails()->sum('total')*23000,
+            ]);
+            
+            return redirect()->to($data_url);
+        }
 
         return view('customer.checkout-result')->with("success","okee");
 

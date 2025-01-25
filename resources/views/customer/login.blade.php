@@ -29,20 +29,21 @@
                 <div class ="col-lg-6 offset-lg-3">
                     <div class ="login-form">
                         <h2>Log in</h2>
-                        <form action = "#">
+                        <form action = "{{ Route('checkLogin') }}" method = "POST">
+                            @csrf
                             <div class= "group-input">   
-                                <label for="username">Username or Email address *</label>
-                                <input type = "text" id = "username">
+                                <label for="email">Email address *</label>
+                                <input type = "text" id = "email" name ="email">
                             </div>
                             <div class ="group-input">
                                 <label for = "pass">Password *</label>
-                                <input type= "text" id = "pass">
+                                <input type= "password" id = "pass" name = "password">
                             </div> 
                             <div class= "group-input gi-check">
                                 <div class ="gi-more">
                                     <label for = "save-pass">
                                         Save password
-                                        <input type= "checkbox" id= "save-pass">
+                                        <input type= "checkbox" id= "save-pass" name = "remember">
                                         <span class= "checkmark"></span>
                                     </label>
                                     <a href = "#" class ="forget-pass">Forget your password</a>
@@ -51,7 +52,7 @@
                             <button type ="submit" class="site-btn login-btn">Sign in</button>
                         </form>
                         <div class ="switch-login">
-                            <a href = "register.html" class= "or-login">Or create an account</a>
+                            <a href = "{{ Route('registerView') }}" class= "or-login">Or create an account</a>
                         </div>
                     </div>
                 </div>
