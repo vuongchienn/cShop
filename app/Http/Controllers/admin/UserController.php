@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -12,7 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view("admin.user.index");
+        $users = User::orderBy("created_at","desc")->paginate(10);
+        return view("admin.user.index",["users"=> $users]);
     }
 
     /**
@@ -20,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.user.create");
     }
 
     /**
@@ -28,15 +30,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'email'=> 'required|email',
+            'password'=> 'required',
+            'name' =>'required|alpha',
+            "con-password"=>"required",
+            'role'=>'required'
+        ]);
 
+        if($validated['password']!=$validated['con-password']){
+            return back()->with('error','Confirm password does not match');
+        }
+        $user = User::create([
+            'email'=> $validated['email'],
+            'name'=> $validated['name'],
+            'password'=> bcrypt($validated['password']),
+            'avatar'=>'safsd',
+            'role'=> $validated['role'],
+        ]);
+        return back()->with('success','User created successfully !');
+    }
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return view("admin.user.show",["user"=> $user]);
     }
 
     /**
@@ -44,7 +64,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);    
+        return view("admin.user.edit",["user"=> $user]);
     }
 
     /**
@@ -52,7 +73,16 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+        $validated = $request->validate([
+            'email'=> 'required|email',
+            'name' =>'required|alpha',
+            'role' =>'required'
+        ]);
+
+        $user->update($validated);
+        return redirect()->route('users.show',$user->id)->with('success','This user updated successfully !');
+
     }
 
     /**
@@ -60,6 +90,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('success','This user deleted successfully !');
     }
 }

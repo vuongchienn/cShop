@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="page-title-actions">
-                                <a href="./user-create.html" class="btn-shadow btn-hover-shine mr-3 btn btn-primary">
+                                <a href="{{ Route('users.create') }}" class="btn-shadow btn-hover-shine mr-3 btn btn-primary">
                                     <span class="btn-icon-wrapper pr-2 opacity-7">
                                         <i class="fa fa-plus fa-w-20"></i>
                                     </span>
@@ -71,8 +71,10 @@
                                         </thead>
                                         <tbody>
 
+                                            @foreach($users as $user)
                                             <tr>
-                                                <td class="text-center text-muted">#01</td>
+
+                                                <td class="text-center text-muted">#{{ $user->id }}</td>
                                                 <td>
                                                     <div class="widget-content p-0">
                                                         <div class="widget-content-wrapper">
@@ -85,40 +87,66 @@
                                                                 </div>
                                                             </div>
                                                             <div class="widget-content-left flex2">
-                                                                <div class="widget-heading">CodeLean</div>
+                                                                <div class="widget-heading">{{ $user->name }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="text-center">info@CodeLean.vn</td>
+                                                <td class="text-center">{{ $user->email }}</td>
                                                 <td class="text-center">
-                                                    Admin
+                                                    {{ $user->role }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="./user-show.html"
+                                                    <a href="{{ Route('users.show',$user->id) }}"
                                                         class="btn btn-hover-shine btn-outline-primary border-0 btn-sm">
                                                         Details
                                                     </a>
-                                                    <a href="./user-edit.html" data-toggle="tooltip" title="Edit"
+                                                    <a href="{{ Route('users.edit',$user->id) }}" data-toggle="tooltip" title="Edit"
                                                         data-placement="bottom" class="btn btn-outline-warning border-0 btn-sm">
                                                         <span class="btn-icon-wrapper opacity-8">
                                                             <i class="fa fa-edit fa-w-20"></i>
                                                         </span>
                                                     </a>
-                                                    <form class="d-inline" action="" method="post">
+
+
+                                                    <div class="d-inline">
                                                         <button class="btn btn-hover-shine btn-outline-danger border-0 btn-sm"
-                                                            type="submit" data-toggle="tooltip" title="Delete"
-                                                            data-placement="bottom"
-                                                            onclick="return confirm('Do you really want to delete this item?')">
-                                                            <span class="btn-icon-wrapper opacity-8">
+                                                            type="submit" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $user->id }}">
                                                                 <i class="fa fa-trash fa-w-20"></i>
-                                                            </span>
                                                         </button>
-                                                    </form>
+                                                    </div>
+
+
+                                                    <div class="modal fade" id="deleteModal{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $user->id }}" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel{{ $user->id }}">Cảnh báo</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Bạn có muốn xóa cầu thủ <strong>{{ $user->name }}</strong> không ?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form id="deleteForm{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger">Có</button>
+                                                                    </form>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </td>
                                             </tr>
-
-                                            
+                                            @endforeach
+                                            <tr>
+                                                <div>
+                                                    {{ $users->links('pagination::bootstrap-5') }}
+                                                </div>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -126,18 +154,7 @@
                                 <div class="d-block card-footer">
                                     <nav role="navigation" aria-label="Pagination Navigation"
                                         class="flex items-center justify-between">
-                                        <div class="flex justify-between flex-1 sm:hidden">
-                                            <span
-                                                class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md">
-                                                « Previous
-                                            </span>
-
-                                            <a href="#page=2"
-                                                class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                                                Next »
-                                            </a>
-                                        </div>
-
+                                        
                                         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                                             <div>
                                                 <p class="text-sm text-gray-700 leading-5">
@@ -195,5 +212,6 @@
                         </div>
                     </div>
                 </div>
+               
                 <!-- End Main -->
     @endsection

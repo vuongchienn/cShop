@@ -14,24 +14,35 @@ class AuthController extends Controller
 
     public function checkLogin(Request $request){
         $credentials = [
-            "email"=> $request->email,
-            "password"=> $request->password,
-            "role"=>2
+            "email" => $request->email,
+            "password" => $request->password,
         ];
-
+    
         $remember = $request->remember;
-
+    
         if(Auth::attempt($credentials, $remember)){
-            return redirect()->intended("");
-        }
-        else {
-            return back()->with('error','EMAIL or PASSWORD is incorect !');
+            // Kiểm tra người dùng đã đăng nhập chưa
+            if(Auth::check()){
+                $user = Auth::user();  // Lấy thông tin người dùng
+                // Kiểm tra vai trò người dùng
+                if($user->role == 2){
+                    return redirect()->intended(""); // Trang dành cho người dùng có role = 2
+                } else {
+                    return redirect()->intended("admin/users"); // Trang dành cho quản trị viên
+                }
+            }
+        } else {
+            return back()->with('error','EMAIL or PASSWORD is incorrect!');
         }
     }
+    
 
     public function logout(){
         Auth::logout();
-        return back();
+        session()->invalidate();
+        session()->regenerateToken(); 
+
+        return view('customer.login');
     }
 
     public function registerView(){

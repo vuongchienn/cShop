@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\CheckMemberLogin;
+use App\Http\Middleware\CheckRoleAdmin;
+use App\Http\Middleware\CheckRoleCustomer;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
