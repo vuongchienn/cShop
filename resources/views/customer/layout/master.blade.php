@@ -129,19 +129,22 @@
                                                         @foreach($productInCarts as $productInCart)
                                                         <tr>
                                                             @php
-                                                            $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
+                                                            $totalPrice += $productInCart->pivot->quantity * $productInCart->product->price;
                                                             @endphp
-                                                            <td class = "si-pic"><img src= "{{ asset('storage/' . $productInCart->productImages->first()->path) }}"></td>
+                                                            <td class = "si-pic"><img src= "{{ asset('storage/' . $productInCart->product->productImages->first()->path) }}"></td>
                                                             <td class=  "si-text">
                                                                 <div class= "product-selected">
-                                                                    <p>${{ $productInCart->price }} x {{ $productInCart->pivot->quantity }}</p>
-                                                                    <h6>{{ $productInCart->name }}</h6>
+                                                                    <p>${{ $productInCart->product->price }} x {{ $productInCart->pivot->quantity }}</p>
+                                                                    <h6>{{ $productInCart->product->name }}</h6>
                                                                 </div>
                                                             </td>
                                                         
-                                                                <form action = {{ Route('cart.destroy',$productInCart->id) }} method = "POST">
+                                                                <form action = {{ Route('cart.destroy',$productInCart->product->id) }} method = "POST">
                                                                     @method('DELETE')
                                                                     @csrf
+                                                                    <input type= "hidden" value = "{{ $productInCart->color }}" name = "color">
+                                                                    <input type= "hidden" value = "{{ $productInCart->size }}" name = "size">
+                                                                  
                                                                     <td class="si-close"><button style = "border:none;background:white;" type = "submit"><i class= "ti-close"></i></button></td>
                                                                 </form>
         
@@ -237,7 +240,7 @@
                         </li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
-                                <li><a href = "">Blog Details</a></li>
+                                <li><a href = "{{ Route('order.index') }}">My orders</a></li>
                                 <li><a href = "">Shopping Cart</a></li>
                                 <li><a href = "">Checkout</a></li>
                                 <li><a href = "">Faq</a></li>

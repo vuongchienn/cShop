@@ -16,7 +16,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('user_id', Auth::user()->id)->get();
+      
+
+        
+        return view("customer.my-order", compact("orders"));
     }
 
     /**
@@ -74,6 +78,7 @@ class OrderController extends Controller
             "payment_method.required"=>"Payment method is required"
         ]);
 
+  
         $order = new Order();
         $order->first_name = $validated["first_name"];
         $order->last_name = $validated["last_name"];
@@ -90,10 +95,10 @@ class OrderController extends Controller
             OrderDetail::create([
                 'user_id'=> Auth::user()->id,
                 "quantity"=>$productInCart->pivot->quantity,
-                "total"=> $productInCart->price * $productInCart->pivot->quantity,
+                "total"=> $productInCart->product->price * $productInCart->pivot->quantity,
                 "order_id"=> $order->id,
-                "product_id"=> $productInCart->id,
-                "amount"=> $productInCart->price * $productInCart->pivot->quantity
+                "product_detail_id"=> $productInCart->id,
+                "amount"=> $productInCart->product->price * $productInCart->pivot->quantity
             ]);
         }
 
@@ -118,7 +123,8 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::find($id);
+        return view("customer.my-order-detail")->with("order", $order);
     }
 
     /**

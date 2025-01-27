@@ -16,9 +16,6 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function orderDetails(){
-        return $this->hasMany(OrderDetail::class);
-    }
 
     public function productComments(){
         return $this->hasMany(ProductComment::class);
@@ -31,17 +28,7 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
     
+  
 
-        public function carts()
-        {
-            return $this->hasMany(Cart::class);
-        }
-
-    public function cartUsers()
-        {
-            return $this->belongsToMany(User::class, 'carts')
-                        ->withPivot('quantity')
-                        ->withTimestamps();
-        }
 
 }

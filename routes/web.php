@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\BrandController as BrandController;
 use App\Http\Controllers\admin\UserController ;
 use App\Http\Controllers\admin\ProductImageController as ProductImageController;
 use App\Http\Controllers\admin\ProductDetailController as ProductDetailController;
+use App\Http\Controllers\admin\OrderController as AdminOrderController;
 
 use App\Http\Controllers\admin\ProductController as AdminProductController;
 
@@ -47,11 +48,13 @@ Route::prefix('admin')->middleware([CheckMemberLogin::class,CheckRoleAdmin::clas
     Route::resource('product', AdminProductController::class);
     Route::resource('product/{product_id}/image', ProductImageController::class);
     Route::resource('product/{product_id}/detail', ProductDetailController::class);
+    Route::resource('orders', AdminOrderController::class);
 
     Route::post('categorySeach',[CategoryController::class,'search'])->name('searchCategory');
     Route::post('userSeach',[UserController::class,'search'])->name('searchUser');
     Route::post('brandSeach',[BrandController::class,'search'])->name('searchBrand');
     Route::post('productSeach',[AdminProductController::class,'search'])->name('searchProduct');
+    Route::post('orderSeach',[AdminOrderController::class,'search'])->name('searchOrder');
 });
 
 

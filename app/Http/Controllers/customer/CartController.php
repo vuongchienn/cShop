@@ -4,6 +4,7 @@ namespace App\Http\Controllers\customer;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\ProductDetail;
 
 use App\Models\Cart;
 use App\Models\User;
@@ -34,12 +35,21 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'color' =>"required",
+            "size"=>"required"
+        ]);
+       
         $user_id = Auth::user()->id;
         $product_id = $request->product_id;
+        $product_detail = ProductDetail::where("product_id",$product_id)->where('color','=',$validated['color'])->where('size','=',$validated['size'])->first();
+        if(!isset($product_detail)){
+            return redirect()->route("products.index")->with("error","This product is ran out of !");
+        }
         $quantity = $request->quantity;
         Cart::create([
             "user_id"=> $user_id,
-            "product_id"=> $product_id,
+            "product_detail_id"=> $product_detail->id,
             "quantity"=> $quantity
         ]);
         return redirect()->route("products.index")->with("success","Product added to cart succcessfully !");
@@ -72,10 +82,13 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id,Request $request)
     {
+        
         $user_id = Auth::user()->id;
-        $cart = Cart::where('user_id',$user_id)->where('product_id', $id)->first();
+        $product_id = $id;
+        $product_detail = ProductDetail::where("product_id",$product_id)->where('color','=',$request->color)->where('size','=',$request->size)->first();
+        $cart = Cart::where('user_id',$user_id)->where('product_detail_id', $product_detail->id)->first();
         $cart->delete();
         return back()->with('success','Product removed from the cart succcessfully !');
     }

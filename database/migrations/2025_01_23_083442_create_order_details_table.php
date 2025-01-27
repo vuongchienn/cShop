@@ -17,9 +17,8 @@ return new class extends Migration
             $table->double('total');
             $table->double('amount');
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('product_id');
-            $table->string('payment_method');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('product_detail_id');
+            $table->foreign('product_detail_id')->references('id')->on('product_details')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on   ('orders')->onDelete('cascade');
             $table->timestamps();
         });

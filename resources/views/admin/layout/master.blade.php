@@ -1469,7 +1469,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="./order.html">
+                                        <a href="{{ Route('orders.index') }}">
                                             <i class="metismenu-icon"></i>Order
                                         </a>
                                     </li>

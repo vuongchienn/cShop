@@ -106,9 +106,9 @@
                                   
                                     @foreach($productInCarts as $productInCart)
                                         @php
-                                            $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
+                                            $totalPrice += $productInCart->pivot->quantity * $productInCart->product->price;
                                         @endphp
-                                        <li class = "fw-normal">{{ $productInCart->name }} x {{ $productInCart->pivot->quantity }} <span>${{ $productInCart->price*$productInCart->pivot->quantity }}</span></li>
+                                        <li class = "fw-normal">{{ $productInCart->product->name }} x {{ $productInCart->pivot->quantity }} <span>${{ $productInCart->product->price*$productInCart->pivot->quantity }}</span></li>
                                     @endforeach
 
                                     <li class = "fw-normal">Subtotal<span>${{ $totalPrice }}</span></li>

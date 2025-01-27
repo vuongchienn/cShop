@@ -31,6 +31,8 @@
                                 <tr>
                                     <th>Image</th>
                                     <th class = "p-name">Product Name</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
@@ -43,14 +45,20 @@
                                 @endphp
                                 @foreach($productInCarts as $productInCart)
                                                         @php
-                                                        $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
+                                                        $totalPrice += $productInCart->pivot->quantity * $productInCart->product->price;
                                                         @endphp
                                     <tr>
-                                        <td class ="cart-pic first-row"><img src= "{{ asset('storage/' . $productInCart->productImages->first()->path) }}" alt =""></td>
+                                        <td class ="cart-pic first-row"><img src= "{{ asset('storage/' . $productInCart->product->productImages->first()->path) }}" alt =""></td>
                                         <td class= "cart-title first-row">
-                                            <h5>{{ $productInCart->name }}</h5>
+                                            <h5>{{ $productInCart->product->name }}</h5>
                                         </td>
-                                        <td class="p-price first-row" data-price="{{ $productInCart->price }}">${{ $productInCart->price }}</td>
+                                        <td class= "cart-title first-row">
+                                            <h6>{{ $productInCart->color}}</h5>
+                                        </td>
+                                        <td class= "cart-title first-row">
+                                            <h6>{{ $productInCart->size}}</h5>
+                                        </td>
+                                        <td class="p-price first-row" data-price="{{ $productInCart->product->price }}">${{ $productInCart->product->price }}</td>
                                         <td class="qua-col first-row">
                                             <div class="quantity">
                                                 <div >
@@ -58,11 +66,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="total-price first-row">${{ ($productInCart->pivot->quantity * $productInCart->price) }}</td>
+                                        <td class="total-price first-row">${{ ($productInCart->pivot->quantity * $productInCart->product->price) }}</td>
 
-                                        <form action = {{ Route('cart.destroy',$productInCart->id) }} method = "POST">
+                                        <form action = {{ Route('cart.destroy',$productInCart->product->id) }} method = "POST">
                                             @method('DELETE')
                                             @csrf
+                                            <input type= "hidden" value = "{{ $productInCart->color }}" name = "color">
+                                            <input type= "hidden" value = "{{ $productInCart->size }}" name = "size">
                                             <td class= "close-td first-row"><button style = "border:none;background:white;" type = "submit"><i class= "ti-close"></i></button></td>
                                         </form>
                                     </tr>

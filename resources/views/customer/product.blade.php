@@ -208,13 +208,14 @@
                                     <p>{{ $product->content }}</p>
                                     <h4>${{ $product->discount }}<span>${{ $product->price }}</span></h4>
                                 </div>
-
+                                <form action = "{{ Route('cart.store')}}" method = "POST"> 
+                                    @csrf
                                 <div class= "pd-color">
                                     <h6>Color</h6>
                                     <div class="pd-color-choose">
                                         @foreach(collect($product->productDetails)->pluck('color')->unique() as $color)
                                         <div class= "cc-item">
-                                            <input type= "radio" id ="cc-{{ strtolower($color) }}">
+                                            <input type= "radio" id ="cc-{{ strtolower($color) }}" value = {{ $color }} name = "color"> 
                                             <label for = "cc-{{ strtolower($color) }}" class = "cc-{{ strtolower($color) }}"></label>
                                         </div>
                                         @endforeach
@@ -224,15 +225,14 @@
                                 <div class="pd-size-choose">
                                     @foreach(collect($product->productDetails)->pluck('size')->unique() as $size)
                                     <div class = "sc-item">
-                                        <input type = "radio" id = "sm-{{ $size }}">
+                                        <input type = "radio" id = "sm-{{ $size }}" value = "{{ $size }}" name = "size">
                                         <label for = "sm-{{ $size }}">{{ $size }}</label>
                                     </div>
                                     @endforeach
                                 </div>
 
                                 <div class= "quantity">
-                                        <form action = "{{ Route('cart.store')}}" method = "POST"> 
-                                            @csrf
+                                      
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
                                             <div class= "quantity">
                                                 <div class="pro-qty">
@@ -240,10 +240,8 @@
                                                 </div>
                                                 <button type ="submit" class= "primary-btn pd-cart"><a>Add To Cart</a></button>
                                             </div>
-                                        </form>
-
                                 </div>
-
+                            </form>
                                 <ul class= "pd-tags">
                                     <li>    
                                         <span>CATEGORIES</span>: {{ $product->category->name }}

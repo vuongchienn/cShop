@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('city');
             $table->string('email');
             $table->string('phone');
+            $table->string('payment_method');
             $table->unsignedBigInteger('user_id');
+            $table->integer('status')->default(1);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

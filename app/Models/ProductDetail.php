@@ -14,4 +14,21 @@ class ProductDetail extends Model
         return $this->belongsTo(Product::class);
     }
     
+    
+    public function cartUsers()
+        {
+            return $this->belongsToMany(User::class, 'carts')
+                        ->withPivot('quantity')
+                        ->withTimestamps();
+        }
+
+    public function carts()
+        {
+            return $this->hasMany(Cart::class);
+        }
+
+
+    public function orderDetails(){
+        return $this->hasMany(OrderDetail::class);
+    }
 }
