@@ -112,7 +112,7 @@
                         @foreach($womenRelatedProducts as $womenRelatedProduct)
                         <div class= "product-item item {{ $womenRelatedProduct->tag }}">
                             <div class= "pi-pic">
-                                <img src=  "customer/img/products/women-1.jpg" alt = "">
+                                <img src=  "{{ $womenRelatedProduct->productImages->isNotEmpty() ? asset('storage/' . $womenRelatedProduct->productImages->first()->path) : asset('./customer/img/products/man-1.jpg') }}" alt = "">
                                 @if($womenRelatedProduct->discount !=null)
                                     <div class= "sale">
                                         Sale
@@ -209,7 +209,7 @@
 
                         <div class= "product-item item {{ $menRelatedProduct->tag }}">
                             <div class= "pi-pic">
-                                <img src=  "customer/img/products/man-1.jpg" alt = "">
+                                <img src=  "{{ $menRelatedProduct->productImages->isNotEmpty() ? asset('storage/' . $menRelatedProduct->productImages->first()->path) : asset('./customer/img/products/man-1.jpg') }}" alt = "">
                                 @if($menRelatedProduct->discount!=null)
                                     <div class=  "sale">
                                         Sale

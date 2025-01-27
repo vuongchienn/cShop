@@ -94,4 +94,12 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success','This user deleted successfully !');
     }
+
+
+
+    public function search(Request $request){
+
+        $users = User::where('name',$request->search)->orderBy("name","asc")->paginate(10);
+        return view("admin.user.index", compact("users"));
+    }
 }

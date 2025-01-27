@@ -166,25 +166,18 @@
                     <div class= "row">
                         <div class = "col-lg-6">
                             <div class = "product-pic-zoom">
-                                <img src=  "customer/img/product-single/product-1.jpg" class = "product-big-img" alt = "">
+                                <img src=  "{{ $product->productImages->isNotEmpty() ? asset('storage/' . $product->productImages->first()->path) : asset('./customer/img/products/man-1.jpg') }}" alt="{{ $product->name }}" class = "product-big-img" alt = "">
                                 <div class = "zoom-icon">
                                     <i class = "fa fa-search-plus"></i>
                                 </div>
                             </div>
                             <div class = "product-thumbs">
                                 <div class ="product-thumbs-track ps-slider owl-carousel">
-                                    <div class ="pt active" data-imgbigurl ="customer/img/product-single/product-1.jpg">
-                                        <img src= "customer/img/product-single/product-1.jpg" alt ="">
-                                    </div>
-                                    <div class ="pt" data-imgbigurl ="customer/img/product-single/product-2.jpg">
-                                        <img src= "customer/img/product-single/product-2.jpg" alt ="">
-                                    </div>
-                                    <div class ="pt" data-imgbigurl ="customer/img/product-single/product-3.jpg">
-                                        <img src= "customer/img/product-single/product-3.jpg" alt ="">
-                                    </div>
-                                    <div class ="pt" data-imgbigurl ="customer/img/product-single/product-1.jpg">
-                                        <img src= "customer/img/product-single/product-1.jpg" alt ="">
-                                    </div>
+                                    @foreach($product->productImages as $image)
+                                        <div class ="pt active" data-imgbigurl ="{{ asset('storage/' . $image->path) }}">
+                                            <img src= "{{ $product->productImages->isNotEmpty() ? asset('storage/' . $image->path) : asset('./customer/img/products/man-1.jpg') }}" alt="{{ $product->name }}" alt ="">
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

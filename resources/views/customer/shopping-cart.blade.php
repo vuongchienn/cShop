@@ -46,7 +46,7 @@
                                                         $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
                                                         @endphp
                                     <tr>
-                                        <td class ="cart-pic first-row"><img src= "customer/img/cart-page/product-1.jpg" alt =""></td>
+                                        <td class ="cart-pic first-row"><img src= "{{ asset('storage/' . $productInCart->productImages->first()->path) }}" alt =""></td>
                                         <td class= "cart-title first-row">
                                             <h5>{{ $productInCart->name }}</h5>
                                         </td>

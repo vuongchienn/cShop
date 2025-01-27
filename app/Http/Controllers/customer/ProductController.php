@@ -38,6 +38,8 @@ class ProductController extends Controller
         }
 
         $products->appends(['sort_by'=> $sortBy]);
+  
+
         return view("customer.shop", ['products'=>$products,'categories'=>$categories,'tags'=>$tags]);
     }
 

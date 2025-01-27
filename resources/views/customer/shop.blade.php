@@ -68,11 +68,10 @@
                     <div class = "row">
                         @foreach ($products as $product)
                         
-                       
                         <div class = "col-lg-4 col-sm-6">
                             <div class = "product-item">
                                 <div class= "pi-pic">
-                                    <img src = "customer/img/products/product-1.jpg" alt = "">
+                                    <img src = "{{ $product->productImages->isNotEmpty() ? asset('storage/' . $product->productImages->first()->path) : asset('./customer/img/products/man-1.jpg') }}" alt="{{ $product->name }}" alt = "">
                                     <div class = "sale pp-sale">Sale</div>
                                     <div class="icon">
                                         <i class = "icon_heart_alt"></i>

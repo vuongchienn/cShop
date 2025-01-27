@@ -8,9 +8,13 @@ use App\Http\Controllers\customer\CartController as CartController;
 use App\Http\Controllers\customer\CheckoutController as CheckoutController;
 use App\Http\Controllers\customer\OrderController as OrderController;
 use App\Http\Controllers\customer\AuthController as CustomerAuthController;
-use App\Http\Controllers\admin\AuthController as AdminAuthController;
-
+use App\Http\Controllers\admin\CategoryController as CategoryController;
+use App\Http\Controllers\admin\BrandController as BrandController;
 use App\Http\Controllers\admin\UserController ;
+use App\Http\Controllers\admin\ProductImageController as ProductImageController;
+use App\Http\Controllers\admin\ProductDetailController as ProductDetailController;
+
+use App\Http\Controllers\admin\ProductController as AdminProductController;
 
 
 use App\Http\Controllers\admin\UserController as AdminUserController;
@@ -23,39 +27,7 @@ Route::get('/', [HomeController::class,'index'])->name('home');
 
 
 
-Route::get('/shop', function () {
-    return view('customer.shop');
-})->name('shop');
 
-
-Route::get('/blog', function () {
-    return view('customer.blog');
-})->name('blog');
-
-
-Route::get('/check-out', function () {
-    return view('customer.check-out');
-})->name('check-out');
-
-
-Route::get('/contact', function () {
-    return view('customer.contact');
-})->name('contact');
-
-
-Route::get('/product', function () {
-    return view('customer.product');
-})->name('product');
-
-
-Route::get('/shopping-cart', function () {
-    return view('customer.shopping-cart');
-})->name('shopping-cart');
-
-
-Route::get('/blog-details', function () {
-    return view('customer.blog-details');
-})->name('blog-details');
 
 
 
@@ -66,6 +38,22 @@ Route::prefix('customer')->middleware([CheckMemberLogin::class,CheckRoleCustomer
     Route::resource('order',OrderController::class);
 
 });
+
+Route::prefix('admin')->middleware([CheckMemberLogin::class,CheckRoleAdmin::class])->group(function () {
+    Route::resource('users', UserController::class);
+    // Route::resource('products', ProductController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('brands', BrandController::class);
+    Route::resource('product', AdminProductController::class);
+    Route::resource('product/{product_id}/image', ProductImageController::class);
+    Route::resource('product/{product_id}/detail', ProductDetailController::class);
+
+    Route::post('categorySeach',[CategoryController::class,'search'])->name('searchCategory');
+    Route::post('userSeach',[UserController::class,'search'])->name('searchUser');
+    Route::post('brandSeach',[BrandController::class,'search'])->name('searchBrand');
+    Route::post('productSeach',[AdminProductController::class,'search'])->name('searchProduct');
+});
+
 
 
 Route::prefix('customer')->group(function () {
@@ -84,8 +72,4 @@ Route::get('register',[CustomerAuthController::class,'registerView'])->name('reg
 Route::post('register',[CustomerAuthController::class,'register'])->name('register');
 
 
-
-Route::prefix('admin')->middleware([CheckMemberLogin::class,CheckRoleAdmin::class])->group(function () {
-    Route::resource('users', UserController::class);
-});
 

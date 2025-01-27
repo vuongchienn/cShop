@@ -131,7 +131,7 @@
                                                             @php
                                                             $totalPrice += $productInCart->pivot->quantity * $productInCart->price;
                                                             @endphp
-                                                            <td class = "si-pic"><img src= "customer/img/select-product-1.jpg"></td>
+                                                            <td class = "si-pic"><img src= "{{ asset('storage/' . $productInCart->productImages->first()->path) }}"></td>
                                                             <td class=  "si-text">
                                                                 <div class= "product-selected">
                                                                     <p>${{ $productInCart->price }} x {{ $productInCart->pivot->quantity }}</p>
@@ -235,13 +235,11 @@
                                 <li><a href = "">Kid's</a></li>
                             </ul>
                         </li>
-                        <li><a href="{{ route('blog') }}">Blog</a></li>
-                        <li><a href="{{ route('contact') }}">Contact</a></li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
                                 <li><a href = "">Blog Details</a></li>
                                 <li><a href = "">Shopping Cart</a></li>
-                                <li><a href = "{{ route('check-out') }}">Checkout</a></li>
+                                <li><a href = "">Checkout</a></li>
                                 <li><a href = "">Faq</a></li>
                                 <li><a href = "">Register</a></li>
                                 <li><a href = "">Login</a></li>
