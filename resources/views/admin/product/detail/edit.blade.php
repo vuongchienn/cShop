@@ -60,7 +60,7 @@
                                                     class="form-control" value="{{ $productDetail->quantity }}">
                                             </div>
                                         </div>
-
+                                        <input class ="hidden" name = "oldQuantity" value = "{{ $productDetail->quantity }}">
                                         <div class="position-relative row form-group mb-1">
                                             <div class="col-md-9 col-xl-8 offset-md-2">
                                                 <a href="#" class="border-0 btn btn-outline-danger mr-1">
@@ -86,4 +86,47 @@
                     </div>
                 </div>
                 <!-- End Main -->
+@endsection
+@section('sidebar')
+<div class="scrollbar-sidebar">
+    <div class="app-sidebar__inner">
+        <ul class="vertical-nav-menu">
+            <li class="app-sidebar__heading">Menu</li>
+
+            <li class="mm-active">
+                <a href="#">
+                    <i class="metismenu-icon pe-7s-plugin"></i>Applications
+                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{ Route('users.index') }}" >
+                            <i class="metismenu-icon"></i>User
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ Route('orders.index') }}" >
+                            <i class="metismenu-icon"></i>Order
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ Route('product.index') }}" class="mm-active">
+                            <i class="metismenu-icon"></i>Product
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ Route('categories.index') }}" >
+                            <i class="metismenu-icon"></i>Category
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ Route('brands.index')  }}" >
+                            <i class="metismenu-icon"></i>Brand
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
 @endsection

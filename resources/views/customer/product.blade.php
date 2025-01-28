@@ -10,8 +10,8 @@
             <div class="row">
                     <div class="col-lg-12">
                         <div class = "breadcrumb-text">
-                            <a href = "index.html"><i class = "fa fa-home"></i>Home</a>
-                            <a href = "shop.html">Shop</a>
+                            <a href = "{{ Route('home') }}"><i class = "fa fa-home"></i>Home</a>
+                            <a href = "{{ Route('products.index') }}">Shop</a>
                             <span>Details</span>
                         </div>
                     </div>
@@ -375,7 +375,7 @@
                                             @foreach($product->productComments as $pComment)
                                             <div class ="co-item">
                                                 <div class = "avatar-pic">
-                                                    <img src = "customer/img/product-single/avatar-1.png" alt = "">
+                                                    <img src = "{{ asset('storage/'. Auth::user()->avatar)}}" alt = "">
                                                 </div>
                                                 <div class = "avatar-text">
                                                     <div class= "at-rating">
@@ -396,16 +396,12 @@
                                        
                                         <div class ="leave-comment">
                                             <h4>Leave A Commet</h4>
-                                            <form action = "#" class = comment-form>
+                                            <form action = "{{ Route("comments.store") }}" method = "POST" class = comment-form>
+                                                @csrf
                                                 <div class = "row">
-                                                    <div class ="col-lg-6">
-                                                        <input type = "text" placeholder="Name">
-                                                    </div>
-                                                    <div class ="col-lg-6">
-                                                        <input type = "text" placeholder="Email">
-                                                    </div>
                                                     <div class ="col-lg-12">
-                                                        <textarea placeholder = "Messages"></textarea>
+                                                        <input type = "hidden" value = "{{ $product->id }}" name= "product_id">
+                                                        <textarea placeholder = "Messages" name = "message"></textarea>
                                                         <div class = "personal-rating">
                                                                 <div class="rate">
                                                                     <input type="radio" id="star5" name="rating" value="5" />

@@ -9,21 +9,40 @@
     {{-- Hero section --}}
     <section class  = "hero-section">
         <div class = "hero-items owl-carousel">
-            <div class = "single-hero-items set-bg" data-setbg = "customer/img/hero-1.jpg">
+            <div class = "single-hero-items set-bg" data-setbg = "customer/img/hero-4.jpg">
                 <div class= "container">
                     <div class=  "row">
                         <div class="col-lg-5">
-                            <span>Bag,Kids</span>
+                            <span>FOR HER</span>
                             <h1>
-                                Black Friday
+                                Stylish Winter Collection
                             </h1>           
-                            <p>Lorem ipsum dolor sit amet ...</p>        
-                            <a href = "" class = "primary-btn">Show now</a>         
+                            <p>Discover the perfect outfits for winter! Modern designs and unparalleled comfort for the season.</p>        
+                            <a href = "{{ Route('products.index') }}" class = "primary-btn">Show now</a>         
                         </div>
                     </div>
 
                     <div class ="off-card">
-                        <h2>Sale <span>50%</span></h2>
+                        <h2>Sale <span>Up to 60%</span></h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class = "single-hero-items set-bg" data-setbg = "customer/img/hero-5.avif">
+                <div class= "container">
+                    <div class=  "row">
+                        <div class="col-lg-5">
+                            <span>FOR HIM</span>
+                            <h1>
+                                Classic & Modern Styles
+                            </h1>           
+                            <p>Elevate your wardrobe with our latest collection. Perfect fits, bold designs, and unbeatable offers!</p>        
+                            <a href = "{{ Route("products.index") }}" class = "primary-btn">Show now</a>         
+                        </div>
+                    </div>
+
+                    <div class ="off-card">
+                        <h2>Sale <span>Up to 60%</span></h2>
                     </div>
                 </div>
             </div>
@@ -32,17 +51,17 @@
                 <div class= "container">
                     <div class=  "row">
                         <div class="col-lg-5">
-                            <span>Bag,Kids</span>
+                            <span>FOR KIDS</span>
                             <h1>
-                                Black Friday
+                                Fun & Playful Styles
                             </h1>           
-                            <p>Lorem ipsum dolor sit amet ...</p>        
-                            <a href = "" class = "primary-btn">Show now</a>         
+                            <p>Discover the cutest outfits for your little ones! Comfort and style for every adventure.</p>        
+                            <a href = "{{ Route("products.index") }}" class = "primary-btn">Show now</a>         
                         </div>
                     </div>
 
                     <div class ="off-card">
-                        <h2>Sale <span>50%</span></h2>
+                        <h2>Sale <span>Up to 40%</span></h2>
                     </div>
                 </div>
             </div>
@@ -93,7 +112,7 @@
                 <div class = "col-lg-3">
                     <div class= "product-large set-bg" data-setbg = "customer/img/products/women-large.jpg">
                         <h2>Women's</h2>
-                        <a href = "">Discover More</a>
+                        <a href = "{{ Route('products.index') }}">Discover More</a>
                     </div>
                 </div>
 
@@ -155,7 +174,7 @@
             <div class="col-lg-6 text-center">
                 <div class ="section-title">
                     <h2>Deal Of The Week</h2>
-                    <p>Lorem ipsum dolor sit amet, ...</p>
+                    <p>Don't miss out on this exclusive deal! Stylish, high-quality, and at an unbeatable price.</p>
                     <div class= "product-price">
                         $35.00
                         <span>/HandBag</span>
@@ -243,7 +262,7 @@
                 <div class = "col-lg-3  offset-lg-1">
                     <div class= "product-large set-bg" data-setbg = "customer/img/products/man-large.jpg">
                         <h2>Man's</h2>
-                        <a href = "">Discover More</a>
+                        <a href = "{{ Route('products.index') }}">Discover More</a>
                     </div>
                 </div>
 
@@ -430,5 +449,4 @@
             </div>
         </div>
     </section>
-
 @endsection

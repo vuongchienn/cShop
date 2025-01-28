@@ -49,32 +49,21 @@
                     </div>
                     <div class = "phone-service">
                         <i class = "fa fa-phone"></i>
-                        0123456789
+                        0965913971
                     </div>
                 </div>
 
                 <div class = "ht-right">
+                   
                     @if(!Auth::check())
                         <a href = "{{route('login') }}" class = "login-panel"><i class = "fa fa-user"></i>Login</a>
                     @else
                         <a href = "{{route('logout') }}" class = "login-panel"><i class = "fa fa-user"></i>{{ Auth::user()->name }}-Logout</a>
                     @endif
-                    <div class = "lan-selector">
-                        <select class= "language_drop" name = "contries" id = "contries" style = "width:300px;">
-                            <option value = "yt" data-image="customer/img/flag-1.jpg" data-imagecss = "flag yt"
-                            data-title = "English">
-                                English
-                            </option>
-    
-                            <option value = "yu" data-image="customer/img/flag-2.jpg" data-imagecss = "flag yu"
-                            data-title = "Bangladesh">
-                                German
-                            </option>
-                        </select>
-                    </div>
+                    <a href = "{{ Route('avatar.create') }}"class = "login-panel">Upload avatar</a>
 
                     <div class= "top-social">
-                        <a href = "#"><i class = "ti-facebook"></i></a>
+                        <a href = "https://www.facebook.com/vuong.chien.636358/"><i class = "ti-facebook"></i></a>
                         <a href = "#"><i class = "ti-twitter-alt"></i></a>
                         <a href = "#"><i class = "ti-linkedin"></i></a>
                         <a href = "#"><i class = "ti-pinterest"></i></a>
@@ -88,8 +77,8 @@
                 <div class= "row">
                     <div class = "col-lg-2 col-md-2">
                         <div class ="logo">
-                            <a href = "index.html">
-                                <img src = "customer/img/logo.png" height = "25" alt = "">
+                            <a href = "/">
+                                <img src = "customer/img/logo.jpg" height = "50"  alt = "">
                             </a>
                         </div>
                     </div>
@@ -113,7 +102,7 @@
                                 </li>
                                 @if($productInCarts)
                                 <li class= "cart-icon">
-                                    <a href = "#"> 
+                                    <a href = "{{ Route('cart.index') }}"> 
                                         <i class = "icon_bag_alt"></i>
                                         <span>{{ $productInCarts->count('id') }}</span>
                                     </a>
@@ -209,43 +198,25 @@
             </div>
         </div>
 
-        <div class = "nav-item">
-            <div class="container">
-                <div class= "nav-depart">
-                    <div class= "depart-btn">
-                        <i class= "ti-menu"></i>
-                        <span>All departments</span>
-                        <ul class= "depart-hover">
-                            <li class ="active"><a href = "#">Women's Clothing</a></li>       
-                            <li><a href = "#">Men's Clothing</a></li>
-                            <li><a href = "#">Underwear</a></li>
-                            <li><a href = "#">Kid's Clothing</a></li>
-                            <li><a href = "#">Brand </a></li>
-                            <li><a href = "#">Accessories/Shoes</a></li>
-                            <li><a href = "#">Luxury Brand</a></li>
-                            <li><a href = "#">Brand Outdoor Apparel</a></li>
-                        </ul>
-                    </div>
-                </div>
+        <div class = "nav-item" >
+            <div class="container" style ='display: flex;justify-content:center; align-items: center; list-style: none;'>
                 <nav class ="nav-menu mobile-menu">
                     <ul>
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('products.index') }}">Shop</a></li>
                         <li><a href="">Collection</a>
                             <ul class="dropdown">
-                                <li><a href = "">Men's</a></li>
-                                <li><a href = "">Women's</a></li>
-                                <li><a href = "">Kid's</a></li>
+                                <li><a href = "customer/category/men">Men's</a></li>
+                                <li><a href = "customer/category/women">Women's</a></li>
+                                <li><a href = "customer/category/kids">Kid's</a></li>
                             </ul>
                         </li>
                         <li><a href="">Pages</a>
                             <ul class="dropdown">
                                 <li><a href = "{{ Route('order.index') }}">My orders</a></li>
-                                <li><a href = "">Shopping Cart</a></li>
-                                <li><a href = "">Checkout</a></li>
-                                <li><a href = "">Faq</a></li>
-                                <li><a href = "">Register</a></li>
-                                <li><a href = "">Login</a></li>
+                                <li><a href = "{{ Route('cart.index') }}">Shopping Cart</a></li>
+                                <li><a href = "{{ Route('check-out.index') }}">Checkout</a></li>
+                                <li><a href = "{{ Route('registerView') }}">Register</a></li>
                             </ul>
                         </li>
 
@@ -277,40 +248,6 @@
 
  {{-- Partner Logo Section Begin --}}
 
- <div class = "partner-logo"> 
-    <div class = "container">
-        <div class = "logo-carousel owl-carousel">
-            <div class = "logo-item">
-                <div class ="tablecell-inner">
-                    <img src = "customer/img/logo-carousel/logo-1.png">
-                </div>
-            </div>
-
-            <div class = "logo-item">
-                <div class ="tablecell-inner">
-                    <img src = "customer/img/logo-carousel/logo-2.png">
-                </div>
-            </div>
-
-            <div class = "logo-item">
-                <div class ="tablecell-inner">
-                    <img src = "customer/img/logo-carousel/logo-3.png">
-                </div>
-            </div>
-            <div class = "logo-item">
-                <div class ="tablecell-inner">
-                    <img src = "customer/img/logo-carousel/logo-4.png">
-                </div>
-            </div>
-            <div class = "logo-item">
-                <div class ="tablecell-inner">
-                    <img src = "customer/img/logo-carousel/logo-5.png">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 {{-- Footer Section Begin --}}
 <footer class=  "footer-section">
@@ -320,16 +257,16 @@
                 <div class ="footer-left">
                     <div class= "footer-logo">
                         <a href ="" >
-                            <img src=  "customer/img/footer-logo.png" height = "25" alt= "">
+                            <img src=  "customer/img/logo.jpg" height = "100" alt= "">
                         </a>
                     </div>
                     <ul>
-                        <li>1A Yet Kieu . Ha Noi</li>
-                        <li>Phone : 09123914791</li>
-                        <li>Email : asfhsdf@gmail.com</li>
+                        <li>Hoai Duc . Ha Noi</li>
+                        <li>Phone : 0965913971</li>
+                        <li>Email : vuongtatchien21122004@gmail.com</li>
                     </ul>
                     <div class= "footer-social">
-                        <a href ="#"><i class = "fa fa-facebook"></i></a>
+                        <a href ="https://www.facebook.com/vuong.chien.636358/"><i class = "fa fa-facebook"></i></a>
                         <a href ="#"><i class = "fa fa-instagram"></i></a>
                         <a href ="#"><i class = "fa fa-twitter"></i></a>
                         <a href ="#"><i class = "fa fa-pinterest"></i></a>
@@ -373,22 +310,6 @@
         </div>
     </div>
 
-    <div class=  "copyright-reserved">
-        <div class=  "container">
-            <div class=  "row">
-                <div class="col-lg-12">
-                    <div class = "copyright-text">
-                        Copyright <script>document.write(new Date().getFullYear());</script>All rights reserved
-                    </div>
-
-                    <div class=  "payment-pic">
-                        <img src=  "customer/img/payment-method.png" alt = "">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </footer>
     
 

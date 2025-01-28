@@ -8,12 +8,15 @@ use App\Http\Controllers\customer\CartController as CartController;
 use App\Http\Controllers\customer\CheckoutController as CheckoutController;
 use App\Http\Controllers\customer\OrderController as OrderController;
 use App\Http\Controllers\customer\AuthController as CustomerAuthController;
+use App\Http\Controllers\customer\CommentController as CommentController;
+use App\Http\Controllers\customer\ImageController as ImageController;
 use App\Http\Controllers\admin\CategoryController as CategoryController;
 use App\Http\Controllers\admin\BrandController as BrandController;
 use App\Http\Controllers\admin\UserController ;
 use App\Http\Controllers\admin\ProductImageController as ProductImageController;
 use App\Http\Controllers\admin\ProductDetailController as ProductDetailController;
 use App\Http\Controllers\admin\OrderController as AdminOrderController;
+
 
 use App\Http\Controllers\admin\ProductController as AdminProductController;
 
@@ -37,6 +40,8 @@ Route::prefix('customer')->middleware([CheckMemberLogin::class,CheckRoleCustomer
     Route::resource('cart',CartController::class);  
     Route::resource('check-out', CheckoutController::class);
     Route::resource('order',OrderController::class);
+    Route::resource('comments', CommentController::class);
+    Route::resource('avatar', ImageController::class);
 
 });
 

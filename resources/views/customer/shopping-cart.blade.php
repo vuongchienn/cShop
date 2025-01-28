@@ -11,8 +11,8 @@
             <div class="row">
                     <div class="col-lg-12">
                         <div class = "breadcrumb-text">
-                            <a href = "#"><i class = "fa fa-home"></i>Home</a>
-                            <a href = "#">Shop</a>
+                            <a href = "{{ Route('home') }}"><i class = "fa fa-home"></i>Home</a>
+                            <a href = "{{ Route('products.index') }}">Shop</a>
                             <span>Shopping Cart</span>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                                     <li class = "subtotal">Subtotal<span>${{ $totalPrice }}</span></li>
                                     <li class = "cart-total">Total<span>${{ $totalPrice }}</span></li>
                                 </ul>
-                                <a href=  "#" class = "proceed-btn">PROCEED TO CHECK OUT</a>
+                                <a href=  "{{ Route('check-out.index') }}" class = "proceed-btn">PROCEED TO CHECK OUT</a>
                             </div>
                             
                         </div>

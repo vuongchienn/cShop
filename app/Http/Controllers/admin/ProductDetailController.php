@@ -43,6 +43,7 @@ class ProductDetailController extends Controller
         $productDetail = ProductDetail::create($validated);
         $product=Product::find($request->product_id);
         $product->quantity+= $request->quantity;
+        $product->save();
         return redirect('admin/product/'.$request->product_id.'/detail')->with('success','Added successfully !');
     }
 
@@ -84,7 +85,10 @@ class ProductDetailController extends Controller
      
         $product=Product::find($request->product_id);
        
+        $product->quantity -= $request->oldQuantity;
         $product->quantity+= $request->quantity;
+
+        $product->save();
        
         return redirect('admin/product/'.$request->product_id.'/detail')->with('success','Added successfully !');
     }
@@ -95,8 +99,12 @@ class ProductDetailController extends Controller
     public function destroy($product_id,string $id)
     {
         $productDetail = ProductDetail::findOrFail($id) ;
+        $product=Product::find($product_id) ;
+        $product->quantity -= $productDetail->quantity;
+        $product->save();
         $productDetail->delete();
 
+        
         return redirect('admin/product/'.$product_id.'/detail')->with('success','Deleted successfully !');
 
     }

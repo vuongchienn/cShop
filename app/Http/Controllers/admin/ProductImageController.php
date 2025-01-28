@@ -35,27 +35,19 @@ class ProductImageController extends Controller
         $request->validate([
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra định dạng file
         ]);
-
-        $product = Product::find($request->product_id);
-        $productImages = $product->productImages;
-
+    
         if ($request->hasFile('image')) {
-            // Xóa ảnh cũ nếu tồn tại
-            foreach($productImages as $productImage) {
-                if ($productImage->path && Storage::exists('public/productImages/' . $productImage->path)) {
-                    Storage::delete('public/productImages/' . $productImage->path);
-                }
-            }
-            // Lưu ảnh mới
+            // Lưu file mới
             $path = $request->file('image')->store('productImages', 'public');
-
+    
+            // Lưu dữ liệu vào database
             $productImage = ProductImage::create([
-                'product_id'=> $request->product_id,
-                'path'=> $path,
+                'product_id' => $request->product_id,
+                'path' => $path,
             ]);
         }
-
-        return redirect('admin/product/'.$product->id.'/image')->with('success','Image added successfully !');
+    
+        return redirect('admin/product/'.$request->product_id.'/image')->with('success','Image added successfully !');
     }
 
     
@@ -89,8 +81,8 @@ class ProductImageController extends Controller
     public function destroy($product_id,string $id)
     {
         $productImage = ProductImage::find($id);
+        Storage::disk('public')->delete($productImage->path);
         $productImage->delete();
-        Storage::delete('public/productImages/' . $productImage->path);
         return redirect('admin/product/'.$product_id.'/image')->with('success','Image deleted successfully !');
     }
 }

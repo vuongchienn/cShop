@@ -12,8 +12,8 @@
             <div class="row">
                     <div class="col-lg-12">
                         <div class = "breadcrumb-text">
-                            <a href = "#"><i class = "fa fa-home"></i>Home</a>
-                            <a href = "#">Shop</a>
+                            <a href = "{{ Route('home') }}"><i class = "fa fa-home"></i>Home</a>
+                            <a href = "{{ Route('products.index') }}">Shop</a>
                             <span>Check out</span>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                                 </div>
                                 
                                 <div class ="order-btn">
-                                    <button type="submit" class ="site-btn place-btn">Place Order</button>
+                                    <button {{ is_null($productInCarts->first()) ? 'disabled' : '' }}  type="submit" class ="site-btn place-btn">Place Order</button>
                                 </div>
                             </div>
                         </div>
